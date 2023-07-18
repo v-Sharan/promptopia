@@ -1,5 +1,7 @@
-import "@styles/global.css";
+"use client";
 
+import "@styles/global.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Nav, Provider } from "@components";
 
 export const metadata = {
@@ -7,19 +9,22 @@ export const metadata = {
   description: "Discover & Share AI Prompts",
 };
 
+const queryClient = new QueryClient();
+
 const RootLayout = ({ children }) => (
   <html lang="en">
     <body>
-      <Provider>
-        <div className="main">
-          <div className="gradient" />
-        </div>
-
-        <main className="app">
-          <Nav />
-          {children}
-        </main>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+          </div>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
+        </Provider>
+      </QueryClientProvider>
     </body>
   </html>
 );
